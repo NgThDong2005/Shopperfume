@@ -7,13 +7,15 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "start": "nodemon --inspect BE/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "dotenv": "^17.1.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "pug": "^3.0.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
