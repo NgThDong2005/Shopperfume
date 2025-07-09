@@ -1,11 +1,27 @@
 import mysql from 'mysql2';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+console.log("Database config:", {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
 
 const connection = mysql.createConnection({
-  host: 'yamabiko.proxy.rlwy.net',
-  port: 42739,
-  user: 'root',
-  password: 'fdTsJCrdZPkFcJJIQgneLJGwSTmhkRtP',
-  database: 'perfume_shop'
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
