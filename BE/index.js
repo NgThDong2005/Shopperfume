@@ -13,7 +13,7 @@ const app = express();
 
 app.set('view engine', 'pug');
 
-app.set('views', path.join(__dirname, '../../FE/src/views'));
+app.set('views', path.join(__dirname, '../../FE/views'));
 
 app.get('/dashboard', (req, res) => {
   res.render('admin/pages/dashboard/index');

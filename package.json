@@ -7,7 +7,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect BE/src/index.js",
+    "start": "nodemon --inspect BE/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
