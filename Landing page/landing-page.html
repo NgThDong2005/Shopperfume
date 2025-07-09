@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="landing-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header section -->
+     
+    <div class="top">
+        <div class="header">
+            <div class="menu-and-search-box">
+                <div class="menu-box">
+                    <button><i class="fa-solid fa-bars icon"></i> Menu</button>
+                </div>
+                <div class="search-box">
+                    <button><i class="fa-solid fa-magnifying-glass icon"></i> Tìm kiếm</button>
+                </div>
+            </div>
+            <div class="logo-box">
+                <img src="../Pictures/Landing page/shopperfume.png" alt="Logo" class="shopperfume-logo">
+            </div>
+            <div class="utilities-box">
+                <button><i class="fa-solid fa-heart icon"></i></button>
+                <button><i class="fa-solid fa-user icon"></i></button>
+            </div>
+        </div>
+        <div class="category-bar">
+            <div class="left_filter">
+                <button>Tất cả Nước hoa <i class="fa-solid fa-chevron-down"></i></button>
+            </div>
+            <div class="right_filter">
+                <div class="filter-box">
+                    <button>Bộ lọc <i class="fa-solid fa-sliders"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Body section -->
+    <div class="body">
+        <!-- Từ sau block filter đến trước footer -->
+        <div class="paginated-list">
+            <ul class="product-list">
+                <!-- Từng section (từ ảnh đến khúc xem thêm) -->
+
+                <!-- Section 1 -->
+                <li id="001" data-index="0" class="section-item"> 
+                    <div class="whole-product-section">
+                        <!-- Ảnh và card -->
+                        <ul class="section-item"> 
+                            <li id="100" data-index="0" class="section-item_picture">
+                                <img src="../Pictures/Landing page/section 1 pic 1.webp" alt="Section 1 Picture 1" class="section-item_picture1">
+                            </li>
+                            <div class="section-item_cards">
+                                <!-- Card 01 -->
+                                <li id="card 01" data-index="1" class="section-item_items">
+                                    <div class="product-card">
+                                        <div class="product-card_feature">
+                                            <button><i class="fa-solid fa-heart"></i></button>
+                                        </div>
+                                        <div class="product-card_image">
+                                            <img src="../Pictures/Landing page/card 1.jpg" alt="Product 1" class="product-card_image1">
+                                        </div>
+                                        <div class="product-card_info">
+                                            <div class="product-card_label">
+                                                <span>Biểu tượng - Có thể cá nhân hóa</span>
+                                            </div>
+                                            <div class="product-card_name">
+                                                <span>Nước hoa Imagination</span>
+                                            </div>
+                                            <div class="product-card_price">
+                                                <span>Từ 9.500.000đ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Card 02 -->
+                                <li id="card 02" data-index="2" class="section-item_items">
+                                    <div class="product-card">
+                                        <div class="product-card_feature">
+                                            <button><i class="fa-solid fa-heart"></i></button>
+                                        </div>
+                                        <div class="product-card_image">
+                                            <img src="../Pictures/Landing page/card 1.jpg" alt="Product 2" class="product-image2">
+                                        </div>
+                                        <div class="product-card_info">
+                                            <div class="product-card_label">
+                                                <span>Biểu tượng - Có thể cá nhân hóa</span>
+                                            </div>
+                                            <div class="product-card_name">
+                                                <span>Nước hoa Umbre Nomade</span>
+                                            </div>
+                                            <div class="product-card_price">
+                                                <span>Từ 11.500.000đ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Card 03 -->
+                                <li id="card 03" data-index="3" class="section-item_items">
+                                    <div class="product-card">
+                                        <div class="product-card_feature">
+                                            <button><i class="fa-solid fa-heart"></i></button>
+                                        </div>
+                                        <div class="product-card_image">
+                                            <img src="../Pictures/Landing page/card 1.jpg" alt="Product 3" class="product-image3">
+                                        </div>
+                                        <div class="product-card_info">
+                                            <div class="product-card_label">
+                                                <span>Biểu tượng - Có thể cá nhân hóa</span>
+                                            </div>
+                                            <div class="product-card_name">
+                                                <span>Nước hoa Umbre Nomade</span>
+                                            </div>
+                                            <div class="product-card_price">
+                                                <span>Từ 11.500.000đ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Card 04 -->
+                                <li id="card 04" data-index="4" class="section-item_items">
+                                    <div class="product-card">
+                                        <div class="product-card_feature">
+                                            <button><i class="fa-solid fa-heart"></i></button>
+                                        </div>
+                                        <div class="product-card_image">
+                                            <img src="../Pictures/Landing page/card 1.jpg" alt="Product 4" class="product-image4">
+                                        </div>
+                                        <div class="product-card_info">
+                                            <div class="product-card_label">
+                                                <span>Biểu tượng - Có thể cá nhân hóa</span>
+                                            </div>
+                                            <div class="product-card_name">
+                                                <span>Nước hoa Umbre Nomade</span>
+                                            </div>
+                                            <div class="product-card_price">
+                                                <span>Từ 11.500.000đ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                        <!-- Xem thêm button -->
+                        <div class="section-button_wrapper">
+                            <button>Xem thêm</button>
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+     <div class="footer">
+        <div class="page-discription_container">
+            <div class="page-discription">
+            Bước vào thế giới nước hoa cao cấp của Shopperfume để trải nghiệm bản giao hưởng mùi
+            hương mang đậm dấu ấn riêng. Nếu như 
+            nước hoa dành cho nữ
+            mở ra cuộc hành trình tình
+            yêu với mùi hương, nơi mỗi nốt hương là một trải nghiệm xúc cảm, thì nước hoa nam lại
+            mang tinh thần viễn du bất tận khi mỗi tầng hương hứa hẹn đánh thức niềm đam mê khám
+            phá. Qua bộ sưu tập 
+            nước hoa hương Phương Đông
+            , Shopperfume tái hiện di sản của vùng
+            đất Trung Đông qua nguyên liệu trầm hương quý giá, tựa như một cái ôm ấp ám mơn man
+            trên làn da. Trong khi đó, dòng nước hoa Cologne mang khung cảnh xinh đẹp của vùng đất
+            California hiện ra trước mắt những người yêu hương với các mùi hương Unisex tinh tế và
+            khó quên. Nối tiếp hành trình, 
+            nước hoa du lịch
+            với thiết kế vỏ và lõi được chế tác một cách
+            tinh xảo nhờ vào kỹ nghệ chế tác bậc thầy sẽ giúp những chuyến đi trải nghiệm thêm phần
+            thăng hoa.
+            </div>
+        </div>
+        <div class="footer-category_container">
+            <div class="footer-category">
+                <div class="ho-tro">
+                    <ul class="ho-tro-list">
+                        <li class="ho-tro-title">Hỗ trợ</li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chăm sóc sản phẩm</a></li>
+                    </ul>
+                </div>
+                <div class="dich-vu">
+                    <ul class="dich-vu-list">
+                        <li class="dich-vu-title">Dịch vụ</li>
+                        <li><a href="#">Dịch vụ bảo hành</a></li>
+                        <li><a href="#">Dịch vụ cá nhân hóa</a></li>
+                        <li><a href="#">Nghệ thuật tặng quà</a></li>
+                    </ul>
+                </div>
+                <div class="ve-chung-toi">
+                    <ul class="ve-chung-toi-list">
+                        <li class="ve-chung-toi-title">Về chúng tôi</li>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Cửa hàng</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="../Pictures/Landing page/shopperfume.png" alt="Shopperfume Logo" class="footer-logo-image">
+     </div>
+
+</body>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 2000px;
+    }
+    .header {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgb(255, 255, 255);
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .category-bar {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 10px 20px;
+      height: 50px;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Logo</div>
+    <div class="search-bar">Search</div>
+    <div class="user-menu">User Menu</div>
+  </div>
+  <div class="category-bar">
+    <div>Tất cả Nước hoa</div>
+    <div>Bộ lọc</div>
+  </div>
+</body>
+</html>

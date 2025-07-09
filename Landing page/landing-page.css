@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.icon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  display: inline;
+  width: auto;
+  height: auto;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  vertical-align: middle;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+/* Header section */
+.top{
+  position: sticky;
+  z-index: 1000;
+  top: 0px;
+}
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: #5a5a5a 1px solid;
+}
+.menu-and-search-box{
+  display: flex;
+  gap: 20px;
+}
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shopperfume-logo {
+  width: 150px;
+}
+.utilities-box{
+  display: flex;
+  gap: 20px; 
+}
+
+/* Category section */  
+
+.category-bar {
+  position: sticky;
+  top: 100px;
+  z-index: 1000;
+  background: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Section item 1 */
+.section-item_picture1 {
+  width: 100%;
+  height: auto;
+}
+.product-card {
+  position: relative;
+  width: 380.2px;
+  height: 475.25px;
+  margin-right: 1px;
+  background-color: #f0f0f0;
+  padding: 5px;
+}
+.product-card_image {
+  width: 370px;
+  height: 370px;
+  display: flex;
+  justify-content: center;
+}
+
+.section-item_cards {
+  display: flex;
+}
+.product-card_feature {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.product-card_info {
+  position: absolute;
+  text-align: left; 
+  font-size: 15px;
+  bottom: 10px;
+  left: 10px;
+
+}
+.product-card_label, .product-card_name, .product-card_price {
+  margin-bottom: 5px;
+}
+
+.section-button_wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+.section-button_wrapper button {
+  padding: 10px 60px;
+  font-size: 16px;
+  background-color: transparent;  
+  color: black;                  
+  border: 1px solid black;        
+  border-radius: 999px;           
+  cursor: pointer;          
+  transition: all 0.3s ease;
+}
+
+.section-button_wrapper button:hover {
+  background-color: black;
+  color: white;
+}
+
+/*Footer section */
+.page-discription_container {
+  width: 100%;
+  height: auto;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+.footer-category {
+  display: flex;
+  justify-content: space-between; /* 3 cột cách đều nhau */
+  padding: 40px 60px;
+}
+.ho-tro-list, .dich-vu-list, .ve-chung-toi-list {
+  margin-bottom: 10px;
+}
+.footer-category a {
+  text-decoration: none;
+  color: black;
+}
+
+.footer-category a:hover {
+  text-decoration: underline;
+}
+
+.footer-category li {
+  line-height: 3;
+}
+.ho-tro-title, .dich-vu-title, .ve-chung-toi-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  padding : 30px;
+  border-top: #5a5a5a 1px solid;
+}
+
+.footer-logo-image {
+  width: 150px;
+}
