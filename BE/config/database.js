@@ -19,4 +19,16 @@ const sequelize = new Sequelize(
   }
 );
 
-export default sequelize;
+const connect = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connected to database!');
+  } catch (err) {
+    console.error('Failed to connect:', err);
+  }
+};
+
+export default {
+  sequelize,
+  connect,
+};
