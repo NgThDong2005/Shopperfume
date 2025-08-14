@@ -1,7 +1,7 @@
 import Product from "../../models/product.model.js";
+import User from "../../models/user.model.js";
 
 export const index = async (req, res) => {
-    console.log(">>> Đã vào dashboard controller");
   const statistic = {
     categoryProduct: {
       total: 0,
@@ -13,11 +13,6 @@ export const index = async (req, res) => {
       active: 0,
       inactive: 0,
     },
-    account: {
-      total: 0,
-      active: 0,
-      inactive: 0,
-    },
     user: {
       total: 0,
       active: 0,
@@ -25,15 +20,20 @@ export const index = async (req, res) => {
     },
   };
 
-  statistic.product.total = await Product.count();
 
+  statistic.product.total = await Product.count();
   statistic.product.active = 0;
   statistic.product.inactive = 0;
-  console.log(">>> Đã vào dashboard controller");
+
+  statistic.user.total = await User.count();
+  statistic.user.active = 0;
+  statistic.user.inactive = 0;
+
 
   res.render("admin/pages/dashboard/index", {
     pageTitle: "Trang tổng quan",
-    statistic: statistic
+    statistic: statistic,
+    user: res.locals.account
   });
 };
 

@@ -112,7 +112,7 @@
 }
 /* Header */
 .header {
-  background: #202020;
+  background: linear-gradient(90deg, #1120c5 0%, #3a8dde 100%);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -129,7 +129,7 @@
 /* Body */
 .body .sider {
   width: 150px;
-  background: #323232;
+  background: linear-gradient(90deg, #1120c5 0%, #3a8dde 100%);
   color: #fff;
   height: calc(100vh - 56px);
   position: fixed;
