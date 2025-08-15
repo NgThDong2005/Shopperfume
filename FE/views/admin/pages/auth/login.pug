@@ -3,7 +3,8 @@ extends ../../layouts/auth.pug
 block main
   .login-bg
     .login-container
-      h1 Đăng nhập
+      .login-logo
+        img(src='/image/logo.svg', alt='Logo', style='height:40px;display:block;margin:0 auto 24px auto;')
       form(
         action=`/${prefixAdmin}/auth/login`
         method="POST"
