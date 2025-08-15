@@ -13,6 +13,7 @@ database.connect()
 
 
 import routeAdmin from "./routes/admin/index.route.js"
+import routeClient from "./routes/client/index.route.js";
 import systemConfig from "./config/system.js"
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, '../FE/public')));
 app.locals.prefixAdmin = systemConfig.prefixAdmin
 
 routeAdmin(app)
+routeClient(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
