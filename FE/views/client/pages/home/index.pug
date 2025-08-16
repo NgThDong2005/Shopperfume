@@ -1,1 +1,17 @@
-p Hello 
+extends ../../layouts/default.pug
+
+block main
+    each brand in brands
+        if productsByBrand.has(brand.id)
+            section.brand-section
+                if brand.image
+                    img.brand-logo(src=brand.image, alt=brand.name)
+                .product-grid.grid-view
+                    each product in productsByBrand.get(brand.id)
+                        article.product-card
+                            a.card-link(href=product.url)
+                                if product.image
+                                    img.product-image(src=product.image, alt=product.name)
+                            .card-info
+                                h2.product-name=`Nước hoa ${product.name}`
+                                p.product-price=`Từ ${Number(product.price).toLocaleString('vi-VN')} VND`
