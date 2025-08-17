@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+
+block main
+  .product-detail
+    .product-gallery
+      if product.images && product.images.length > 0
+        img.main-image(src=product.image alt=product.name)
+        .thumbnail-list
+          each img, i in product.images
+            img.thumbnail(src=img alt=`${product.name} ${i}`)
+
+    .product-info
+      if product.brand
+        .brand
+          h1.brand-name= `${product.brand.name}`
+
+      h1.product-name= product.name
+      p.product-price #{Number(product.price).toLocaleString()} ₫
+
+      .product-description
+        != product.description
+
+      button.add-to-cart Thêm vào giỏ hàng
+      button.buy-now Mua ngay

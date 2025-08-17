@@ -9,7 +9,7 @@ block main
                 .product-grid.grid-view
                     each product in productsByBrand.get(brand.id)
                         article.product-card
-                            a.card-link(href=product.url)
+                            a.card-link(href=`/product/${product.slug}`)
                                 if product.image
                                     img.product-image(src=product.image, alt=product.name)
                             .card-info
