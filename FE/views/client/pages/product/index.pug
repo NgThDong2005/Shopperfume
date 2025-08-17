@@ -14,8 +14,8 @@ block main
         .brand
           h1.brand-name= `${product.brand.name}`
 
-      h1.product-name= product.name
-      p.product-price #{Number(product.price).toLocaleString()} ₫
+      h1.product-name-detail= product.name
+      p.product-price-detail= `${Number(product.price).toLocaleString()} VND`
 
       .product-description
         != product.description
