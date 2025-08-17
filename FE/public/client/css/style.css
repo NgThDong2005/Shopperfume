@@ -241,3 +241,133 @@
   height: auto; 
   display: block;
 }
+
+/* Modern Login Page Styles */
+.login-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.login-container {
+  background: #ffffe6;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(255, 230, 100, 0.25);
+  padding: 40px 32px 32px 32px;
+  max-width: 350px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+.login-container form {
+  width: 100%;
+}
+
+.login-container .form-group {
+  margin-bottom: 18px;
+}
+
+.login-container label {
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.login-container .form-control {
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: #fffaf7;
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-container .form-control:focus {
+  border-color: #3a8dde;
+  outline: none;
+}
+
+.login-container .btn-primary {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 18px;
+  border-radius: 8px;
+  background: #cec366;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.login-container .btn-primary:hover {
+  background: #e5b115;
+  cursor: pointer
+}
+
+.login-container .forgot {
+  display: block;
+  text-align: right;
+  font-size: 14px;
+  color: #3a8dde;
+  margin-bottom: 12px;
+  text-decoration: none;
+}
+.login-container .forgot:hover {
+  text-decoration: underline;
+}
+
+.login-container .divider {
+  text-align: center;
+  color: #aaa;
+  margin: 18px 0 8px 0;
+  font-size: 14px;
+}
+/* Login Page */
+.login-container {
+  margin-top: 60px;
+  background: #fcfcfc;
+  border-radius: 0px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  padding: 32px 24px;
+}
+
+.login-container h1 {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #202020;
+}
+
+.login-container .form-group {
+  margin-bottom: 18px;
+}
+
+.login-container .form-control {
+  border-radius: 0px;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
+.login-container .btn-primary {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 18px;
+  border-radius: 0px;
+}
+/* End Login */

@@ -28,7 +28,20 @@ const connect = async () => {
   }
 };
 
+const fixUserTable = async () => {
+  try {
+    await sequelize.query(`
+      ALTER TABLE users
+ADD CONSTRAINT chk_role CHECK (role IN ('admin', 'manager', 'customer'));
+
+    `);
+  } catch (err) {
+    console.error("❌ Lỗi khi sửa bảng users:", err);
+  }
+};
+
 export default {
   sequelize,
   connect,
+  fixUserTable
 };

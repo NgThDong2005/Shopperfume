@@ -10,7 +10,6 @@ export const index = async (req, res) => {
     const product_images = await ProductImage.findAll({});
     const brands = await Brand.findAll({}); 
 
-    // Map product_id -> danh sách ảnh
     const productImagesMap = new Map();
     product_images.forEach(image => {
       if (!productImagesMap.has(image.product_id)) {
@@ -19,7 +18,6 @@ export const index = async (req, res) => {
       productImagesMap.get(image.product_id).push(image.image_url);
     });
 
-    // Gán brand, images, image trực tiếp vào từng product
     products.forEach(product => {
       // Gán brand
       product.brand = brands.find(b => b.id === product.brand_id) || null;
@@ -41,15 +39,11 @@ export const index = async (req, res) => {
       productsByBrand.get(brandId).push(product);
     });
 
-    // Log kiểm tra
-    console.log(products);
-
     // Render view
     res.render("client/pages/home/index", {
       pageTitle: "Shopperfume",
       brands,
       productsByBrand
-      // Nếu muốn, bạn có thể bỏ products riêng lẻ, vì productsByBrand đã chứa toàn bộ product
     });
   } catch (err) {
     console.error(err);

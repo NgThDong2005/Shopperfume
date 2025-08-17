@@ -11,7 +11,6 @@ import session from 'express-session';
 import database from "./config/database.js"
 database.connect()
 
-
 import routeAdmin from "./routes/admin/index.route.js"
 import routeClient from "./routes/client/index.route.js";
 import systemConfig from "./config/system.js"

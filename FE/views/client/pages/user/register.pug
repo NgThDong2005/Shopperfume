@@ -1,0 +1,53 @@
+extends ../../layouts/auth.pug
+
+block main
+  .login-bg
+    .login-container
+      .login-logo
+        img(src='/image/logo.svg', alt='Logo', style='height:40px;display:block;margin:0 auto 24px auto;')
+      form(
+        action="/user/register"
+        method="POST"
+      )
+        div.form-group
+          label(for="username") Username
+          input(
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="username"
+            required
+          )
+        div.form-group
+          label(for="email") Email
+          input(
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="username@gmail.com"
+            required
+          )
+        div.form-group
+          label(for="password") Mật khẩu
+          input(
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+          )
+        div.form-group
+          label(for="confirmPassword") Xác nhận mật khẩu
+          input(
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          )
+        button(type="submit" class="btn btn-primary btn-block") Đăng ký
+        .divider
