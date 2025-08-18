@@ -1,46 +1,117 @@
 extends ../../layouts/default.pug
 
 block main
-  h1 Tổng quan
+  h1= pageTitle
 
   .row.mt-4
-    .col-12
+    .col-3
       .card.mb-4
-        .card-header Thông tin tài khoản
+        .card-header Khách hàng
         .card-body
-          if(user.username)
-            p Họ tên: <b>#{user.username}</b>
-          if(user.email)
-            p Email: <b>#{user.email}</b>
+          p Tổng: <b>#{totalUsers}</b>
+          canvas#userChart(width="200" height="200")
 
-    .col-6
-      .card.mb-4
-        .card-header Danh mục sản phẩm
-        .card-body
-          p Số lượng: <b>5</b>
-          p Hoạt động: <b>3</b>
-          p Dừng hoạt động: <b>2</b>
-
-    .col-6
+    .col-3
       .card.mb-4
         .card-header Sản phẩm
         .card-body
-          p Số lượng: <b>#{statistic.product.total}</b>
-          p Hoạt động: <b>#{statistic.product.active}</b>
-          p Dừng hoạt động: <b>#{statistic.product.inactive}</b>
+          p Tổng: <b>#{totalProducts}</b>
+          canvas#productChart(width="200" height="200")
+
+    .col-3
+      .card.mb-4
+        .card-header Thương hiệu
+        .card-body
+          p Tổng: <b>#{totalBrands}</b>
+          canvas#brandChart(width="200" height="200")
+
+    .col-3
+      .card.mb-4
+        .card-header Danh mục
+        .card-body
+          p Tổng: <b>#{totalCategories}</b>
+          canvas#categoryChart(width="200" height="200")
+
+  .row.mt-4
+    .col-6
+      .card.mb-4
+        .card-header Thống kê sản phẩm theo thương hiệu
+        .card-body
+          canvas#productsByBrandChart(width="400" height="200")
 
     .col-6
       .card.mb-4
-        .card-header Tài khoản admin
+        .card-header Thống kê sản phẩm theo danh mục
         .card-body
-          p Số lượng: <b>5</b>
-          p Hoạt động: <b>3</b>
-          p Dừng hoạt động: <b>2</b>
+          canvas#productsByCategoryChart(width="400" height="200")
 
-    .col-6
-      .card.mb-4
-        .card-header Tài khoản client
-        .card-body
-          p Số lượng: <b>5</b>
-          p Hoạt động: <b>3</b>
-          p Dừng hoạt động: <b>2</b>
+  //- Script nhúng Chart.js
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+  script.
+    // Data từ server -> biến JS
+    const productsByBrand = !{JSON.stringify(productsByBrand)};
+    const productsByCategory = !{JSON.stringify(productsByCategory)};
+    const totalUsers = #{totalUsers};
+    const totalProducts = #{totalProducts};
+    const totalBrands = #{totalBrands};
+    const totalCategories = #{totalCategories};
+
+    // Chart tổng quan
+    new Chart(document.getElementById('userChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Người dùng'],
+        datasets: [{ data: [totalUsers], backgroundColor: ['#007bff'] }]
+      }
+    });
+
+    new Chart(document.getElementById('productChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Sản phẩm'],
+        datasets: [{ data: [totalProducts], backgroundColor: ['#28a745'] }]
+      }
+    });
+
+    new Chart(document.getElementById('brandChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Thương hiệu'],
+        datasets: [{ data: [totalBrands], backgroundColor: ['#ffc107'] }]
+      }
+    });
+
+    new Chart(document.getElementById('categoryChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Danh mục'],
+        datasets: [{ data: [totalCategories], backgroundColor: ['#dc3545'] }]
+      }
+    });
+
+    // Chart sản phẩm theo brand
+    new Chart(document.getElementById('productsByBrandChart'), {
+      type: 'bar',
+      data: {
+        labels: productsByBrand.map(b => b.brandName),
+        datasets: [{
+          label: 'Sản phẩm',
+          data: productsByBrand.map(b => b.count),
+          backgroundColor: '#17a2b8'
+        }]
+      }
+    });
+
+    // Chart sản phẩm theo category
+    new Chart(document.getElementById('productsByCategoryChart'), {
+      type: 'bar',
+      data: {
+        labels: productsByCategory.map(c => c.categoryName),
+        datasets: [{
+          label: 'Sản phẩm',
+          data: productsByCategory.map(c => c.count),
+          backgroundColor: '#6f42c1'
+        }]
+      }
+    });
