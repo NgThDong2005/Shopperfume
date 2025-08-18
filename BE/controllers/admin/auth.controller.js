@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const login = (req, res) => {
   res.render('admin/pages/auth/login', {
     pageTitle: 'Đăng nhập',
-    prefix: systemConfig.prefixAdmin
+    prefix: systemConfig.prefixAdmin, 
   });
 };
 

@@ -15,6 +15,8 @@ import routeAdmin from "./routes/admin/index.route.js"
 import routeClient from "./routes/client/index.route.js";
 import systemConfig from "./config/system.js"
 
+import { attachUserToLocals } from './middlewares/admin/auth.middleware.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -30,6 +32,8 @@ app.use(cookieParser('HHKALKS'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 
+app.use(attachUserToLocals);
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../FE/views'));
 app.use(express.static(path.join(__dirname, '../FE/public')));
@@ -38,6 +42,7 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin
 
 routeAdmin(app)
 routeClient(app);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

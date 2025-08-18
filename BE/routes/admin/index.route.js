@@ -1,7 +1,7 @@
 import systemConfig from "../../config/system.js";
 import dashboardRoute from "./dashboard.route.js";
 import authRoute from "./auth.route.js";
-import requireAuth from "../../middlewares/admin/auth.middleware.js";
+import {requireAuth} from "../../middlewares/admin/auth.middleware.js";
 
 const index = (app) => {
   const path = `/${systemConfig.prefixAdmin}`;

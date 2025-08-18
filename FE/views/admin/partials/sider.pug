@@ -3,3 +3,15 @@
     ul 
       li
         a(href=`/${prefixAdmin}/dashboard`) Tổng quan
+      li
+        a(href=`/${prefixAdmin}/products`) Danh sách sản phẩm
+      li
+        a(href=`/${prefixAdmin}/products-category`) Danh mục sản phẩm
+      if user && user.role && user.role.includes("admin")
+        li
+          a(href=`/${prefixAdmin}/roles/permissions`) Phân quyền
+      if user && user.role && user.role.includes("admin")
+        li
+          a(href=`/${prefixAdmin}/accounts`) Tài khoản
+      li
+        a(href=`/${prefixAdmin}/settings/general`) Cài đặt chung

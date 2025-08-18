@@ -45,7 +45,7 @@ block main
         .card-body
           canvas#productsByCategoryChart(width="400" height="200")
 
-  //- Script nhúng Chart.js
+
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
 
   script.
@@ -90,7 +90,36 @@ block main
       }
     });
 
-    // Chart sản phẩm theo brand
+    const colorPalette = [
+      "#007bff", 
+      "#dc3545", 
+      "#28a745", 
+      "#ffc107",
+      "#6f42c1", 
+      "#17a2b8", 
+      "#fd7e14", 
+      "#20c997", 
+      "#e83e8c", 
+      "#343a40"  
+    ];
+
+    function getRandomColors(palette, count) {
+      const colors = [...palette]; 
+      const selected = [];
+
+      for (let i = 0; i < count && colors.length > 0; i++) {
+        const randIndex = Math.floor(Math.random() * colors.length);
+        selected.push(colors[randIndex]);
+        colors.splice(randIndex, 1); 
+      }
+
+      return selected;
+    }
+
+
+    const brandColors = getRandomColors(colorPalette, productsByBrand.length);
+
+
     new Chart(document.getElementById('productsByBrandChart'), {
       type: 'bar',
       data: {
@@ -98,20 +127,32 @@ block main
         datasets: [{
           label: 'Sản phẩm',
           data: productsByBrand.map(b => b.count),
-          backgroundColor: '#17a2b8'
+          backgroundColor: brandColors
         }]
       }
     });
 
-    // Chart sản phẩm theo category
+    const mapping = {
+      male: "Nam",
+      female: "Nữ"
+    };
+
     new Chart(document.getElementById('productsByCategoryChart'), {
       type: 'bar',
       data: {
-        labels: productsByCategory.map(c => c.categoryName),
+        labels: productsByCategory.map(c => {
+          const key = c.categoryName?.trim().toLowerCase();
+          return mapping[key] || c.categoryName;
+        }),
         datasets: [{
           label: 'Sản phẩm',
           data: productsByCategory.map(c => c.count),
-          backgroundColor: '#6f42c1'
+          backgroundColor: productsByCategory.map(c => {
+            const key = c.categoryName?.trim().toLowerCase();
+            if (key === "male") return "blue";       
+            if (key === "female") return "pink";    
+            return "#6f42c1";                       
+          })
         }]
       }
     });

@@ -4,6 +4,7 @@ import User from "../../models/user.model.js";
 import Brand from "../../models/brand.model.js";
 import Category from "../../models/category.model.js";
 
+// [GET] /admin/dashboard
 export const index = async (req, res) => {
   try {
     // Thống kê số lượng
@@ -62,7 +63,8 @@ export const index = async (req, res) => {
       totalBrands,
       totalCategories,
       productsByBrand: productsByBrandWithName,
-      productsByCategory: productsByCategoryWithName
+      productsByCategory: productsByCategoryWithName,
+      user: res.locals.user
     });
   } catch (error) {
     console.error("Dashboard Error:", error);
