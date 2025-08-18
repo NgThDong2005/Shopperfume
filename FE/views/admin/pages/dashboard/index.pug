@@ -3,35 +3,37 @@ extends ../../layouts/default.pug
 block main
   h1= pageTitle
 
+  // Tổng quan bằng card thay vì doughnut chart
   .row.mt-4
     .col-3
-      .card.mb-4
-        .card-header Khách hàng
+      .card.text-center.shadow-sm.mb-4
         .card-body
-          p Tổng: <b>#{totalUsers}</b>
-          canvas#userChart(width="200" height="200")
+          i.fas.fa-users.fa-2x.text-primary.mb-2
+          h5.mb-1 Khách hàng
+          h3.text-dark #{totalUsers}
 
     .col-3
-      .card.mb-4
-        .card-header Sản phẩm
+      .card.text-center.shadow-sm.mb-4
         .card-body
-          p Tổng: <b>#{totalProducts}</b>
-          canvas#productChart(width="200" height="200")
+          i.fas.fa-boxes.fa-2x.text-success.mb-2
+          h5.mb-1 Sản phẩm
+          h3.text-dark #{totalProducts}
 
     .col-3
-      .card.mb-4
-        .card-header Thương hiệu
+      .card.text-center.shadow-sm.mb-4
         .card-body
-          p Tổng: <b>#{totalBrands}</b>
-          canvas#brandChart(width="200" height="200")
+          i.fas.fa-tags.fa-2x.text-warning.mb-2
+          h5.mb-1 Thương hiệu
+          h3.text-dark #{totalBrands}
 
     .col-3
-      .card.mb-4
-        .card-header Danh mục
+      .card.text-center.shadow-sm.mb-4
         .card-body
-          p Tổng: <b>#{totalCategories}</b>
-          canvas#categoryChart(width="200" height="200")
+          i.fas.fa-th-list.fa-2x.text-danger.mb-2
+          h5.mb-1 Danh mục
+          h3.text-dark #{totalCategories}
 
+  // Biểu đồ chi tiết
   .row.mt-4
     .col-6
       .card.mb-4
@@ -49,46 +51,8 @@ block main
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
 
   script.
-    // Data từ server -> biến JS
     const productsByBrand = !{JSON.stringify(productsByBrand)};
     const productsByCategory = !{JSON.stringify(productsByCategory)};
-    const totalUsers = #{totalUsers};
-    const totalProducts = #{totalProducts};
-    const totalBrands = #{totalBrands};
-    const totalCategories = #{totalCategories};
-
-    // Chart tổng quan
-    new Chart(document.getElementById('userChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Người dùng'],
-        datasets: [{ data: [totalUsers], backgroundColor: ['#007bff'] }]
-      }
-    });
-
-    new Chart(document.getElementById('productChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Sản phẩm'],
-        datasets: [{ data: [totalProducts], backgroundColor: ['#28a745'] }]
-      }
-    });
-
-    new Chart(document.getElementById('brandChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Thương hiệu'],
-        datasets: [{ data: [totalBrands], backgroundColor: ['#ffc107'] }]
-      }
-    });
-
-    new Chart(document.getElementById('categoryChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Danh mục'],
-        datasets: [{ data: [totalCategories], backgroundColor: ['#dc3545'] }]
-      }
-    });
 
     const colorPalette = [
       "#007bff", 
@@ -116,9 +80,7 @@ block main
       return selected;
     }
 
-
     const brandColors = getRandomColors(colorPalette, productsByBrand.length);
-
 
     new Chart(document.getElementById('productsByBrandChart'), {
       type: 'bar',

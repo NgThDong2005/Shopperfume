@@ -1,20 +1,28 @@
-header.header
+header.header.bg-white.shadow-sm.py-2
   .container-fluid
     .row.align-items-center
       .col-3
         .inner-logo
-          a(href="/admin/dashboard") Dashboard
+          a.text-decoration-none.text-light.font-weight-bold(href=`/${prefixAdmin}/dashboard`) Dashboard
 
-      div(class="col-9 text-right")
-        a(
-          href=`/${prefixAdmin}/profile`
-          class="btn btn-info btn-sm"
-        )
-          if user && user.username
-            | #{user.username}
-          else
-            | Tài khoản
-        a(
-          href=`/${prefixAdmin}/auth/logout`
-          class="btn btn-danger btn-sm ml-2"
-        ) Đăng xuất
+      .col-9.text-right
+        .dropdown.d-inline-block
+          button.btn.btn-light.border.rounded-pill.px-3.dropdown-toggle#userMenu(
+            type="button" 
+            data-toggle="dropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+          )
+            i.fas.fa-user-circle.mr-2.text-primary
+            if user && user.username
+              | #{user.username}
+            else
+              | Tài khoản
+          .dropdown-menu.dropdown-menu-right.shadow(aria-labelledby="userMenu")
+            a.dropdown-item(href=`/${prefixAdmin}/profile`)
+              i.fas.fa-user.mr-2.text-secondary
+              | Hồ sơ cá nhân
+            div.dropdown-divider
+            a.dropdown-item.text-danger(href=`/${prefixAdmin}/auth/logout`)
+              i.fas.fa-sign-out-alt.mr-2
+              | Đăng xuất

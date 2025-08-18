@@ -2,16 +2,43 @@
   .inner-menu
     ul 
       li
-        a(href=`/${prefixAdmin}/dashboard`) Tổng quan
+        a(href=`/${prefixAdmin}/dashboard`)
+          i.fas.fa-chart-line.mr-2
+          | Tổng quan
+
       li
-        a(href=`/${prefixAdmin}/products`) Danh sách sản phẩm
+        a(href=`/${prefixAdmin}/products`)
+          i.fas.fa-box-open.mr-2
+          | Danh sách sản phẩm
+
       li
-        a(href=`/${prefixAdmin}/products-category`) Danh mục sản phẩm
+        a(href=`/${prefixAdmin}/categories`)
+          i.fas.fa-th-list.mr-2
+          | Danh mục sản phẩm
+
+      li
+        a(href=`/${prefixAdmin}/orders`)
+          i.fas.fa-shopping-cart.mr-2
+          | Đơn hàng
+
+      li
+        a(href=`/${prefixAdmin}/chat`)
+          i.fas.fa-comments.mr-2
+          | Liên hệ
+
       if user && user.role && user.role.includes("admin")
         li
-          a(href=`/${prefixAdmin}/roles/permissions`) Phân quyền
+          a(href=`/${prefixAdmin}/roles/permissions`)
+            i.fas.fa-user-shield.mr-2
+            | Phân quyền
+
       if user && user.role && user.role.includes("admin")
         li
-          a(href=`/${prefixAdmin}/accounts`) Tài khoản
+          a(href=`/${prefixAdmin}/accounts`)
+            i.fas.fa-users.mr-2
+            | Tài khoản
+
       li
-        a(href=`/${prefixAdmin}/settings/general`) Cài đặt chung
+        a(href=`/${prefixAdmin}/settings/general`)
+          i.fas.fa-cogs.mr-2
+          | Cài đặt chung
