@@ -1,4 +1,3 @@
-// BE/controllers/client/home.controller.js
 import Product from "../../models/product.model.js";
 import ProductImage from "../../models/product-image.model.js";
 import Brand from "../../models/brand.model.js";

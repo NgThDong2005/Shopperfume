@@ -499,3 +499,32 @@
   align-items: center;
   gap: 8px;
 }
+
+
+a.add-to-cart,
+a.buy-now {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* nút thêm vào giỏ hàng */
+a.add-to-cart {
+  background: #f2f2f2;
+  color: #000;
+}
+a.add-to-cart:hover {
+  background: #ddd;
+}
+
+/* nút mua ngay */
+a.buy-now {
+  background: #000;
+  color: #fff;
+}
+a.buy-now:hover {
+  background: #333;
+}

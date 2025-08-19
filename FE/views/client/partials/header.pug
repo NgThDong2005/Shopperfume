@@ -13,7 +13,10 @@ header.header
 
     .header-right
       a(href="#") Liên hệ với chúng tôi
-      i.fa.fa-heart
+      if user 
+        a.fa.fa-heart(href="/wishlist")
+      else 
+        a.fa.fa-heart(href="/user/login")
       //- User dropdown
       if user && user.username
         .dropdown

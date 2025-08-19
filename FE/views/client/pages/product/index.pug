@@ -20,6 +20,5 @@ block main
       .product-description
         != product.description
 
-      button.add-to-cart Thêm vào giỏ hàng
-      button.buy-now Mua ngay
-        a(href=`/cart/add/${product.id}`) Thêm vào giỏ hàng
+      a.add-to-cart(href=`/cart/add/${product.slug}?action=add`) Thêm vào danh sách yêu thích
+      a.buy-now(href=`/cart/add/${product.slug}?action=buy`) Mua ngay

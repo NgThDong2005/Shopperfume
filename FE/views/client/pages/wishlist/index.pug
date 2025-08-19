@@ -1,0 +1,13 @@
+extends ../../layouts/default.pug
+
+block main
+    h4 Sản phẩm yêu thích hiện tại (#{wishlist.length})
+    if wishlist.length > 0
+        ul.wishlist-items
+            each item in wishlist
+                li.wishlist-item
+                    a(href=`/product/${item.product.slug}`)
+                        img(src=item.product.image, alt=item.product.name)
+                        span.item-name= item.product.name
+                    span.item-price=`${Number(item.product.price).toLocaleString('vi-VN')} VND`
+                    button.remove-from-wishlist(data-id=item._id) Remove from Wishlist
