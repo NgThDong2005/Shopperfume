@@ -19,6 +19,11 @@ const loginPost = async (req, res) => {
       req.flash('error', 'Email không tồn tại trong hệ thống!');
       return res.redirect(`/user/login`);
     }
+
+    if (!user.role || user.role !== 'customer') {
+      req.flash('error', 'Không tài khoản này!');
+      return res.redirect(`/user/login`);
+    }
     const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
         req.flash('error', 'Sai mật khẩu!');
@@ -27,8 +32,6 @@ const loginPost = async (req, res) => {
 
     if (user.status && user.status !== 'active') {
         req.flash('error', 'Tài khoản đang bị khóa!');
-
-
         return res.redirect(`/user/login`);
     }
 
