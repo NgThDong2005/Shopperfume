@@ -2,9 +2,10 @@
 import Product from "../../models/product.model.js";
 import ProductImage from "../../models/product-image.model.js";
 import Brand from "../../models/brand.model.js";
+import systemConfig from "../../config/system.js";
 
-// [GET] /client/home
-export const index = async (req, res) => {
+// [GET] /admin/product
+export const products = async (req, res) => {
   try {
     // Lấy dữ liệu từ DB
     const products = await Product.findAll({});
@@ -41,8 +42,8 @@ export const index = async (req, res) => {
     });
 
     // Render view
-    res.render("client/pages/home/index", {
-      pageTitle: "Shopperfume",
+    res.render("admin/pages/products/index", {
+      pageTitle: "Quản lý sản phẩm",
       brands,
       productsByBrand
     });
@@ -52,4 +53,37 @@ export const index = async (req, res) => {
   }
 };
 
-export default { index };
+// [GET] /admin/product/:slug
+export const productDetail = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+
+    // Tìm sản phẩm theo slug
+    const product = await Product.findOne({ where: { slug } });
+    if (!product) {
+      return res.status(404).send("Không tìm thấy sản phẩm");
+    }
+
+    // Lấy brand và images liên quan
+    const [brand, productImages] = await Promise.all([
+      Brand.findOne({ where: { id: product.brand_id } }),
+      ProductImage.findAll({ where: { product_id: product.id } })
+    ]);
+
+    // Gán brand và images
+    product.brand = brand || null;
+    product.images = productImages.map(img => img.image_url);
+    product.image = product.images[0] || null;
+
+
+    res.render("admin/pages/products/index", {
+      pageTitle: product.name,
+      product
+    });
+  } catch (err) {
+    console.error("HomeController index error:", err);
+    res.status(500).send("Lỗi server: " + err.message);
+  }
+};
+
+export default { products, productDetail };
