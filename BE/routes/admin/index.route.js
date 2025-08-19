@@ -4,6 +4,7 @@ import authRoute from "./auth.route.js";
 import {requireAuth} from "../../middlewares/admin/auth.middleware.js";
 import accountRoute from "./account.route.js";
 import productRoute from "./product.route.js";
+import orderRoute from "./order.route.js";
 
 const index = (app) => {
   const path = `/${systemConfig.prefixAdmin}`;
@@ -17,6 +18,8 @@ const index = (app) => {
   app.use(`${path}/auth`, authRoute);
 
   app.use(`${path}/products`, requireAuth, productRoute);
+
+  app.use(`${path}/orders`, requireAuth, orderRoute);
 
   app.use(`${path}/accounts`, requireAuth, accountRoute);
 };
