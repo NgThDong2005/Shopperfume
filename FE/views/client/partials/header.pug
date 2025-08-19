@@ -29,6 +29,12 @@ header.header
             | #{user.username}
           ul.dropdown-menu.dropdown-menu-end.shadow(aria-labelledby="userMenu")
             li
+              a.dropdown-item(href="/user/profile")
+                i.fas.fa-user.mr-2
+                | Hồ sơ
+            li
+              hr.dropdown-divider
+            li
               a.dropdown-item(href="/user/orders")
                 i.fas.fa-shopping-cart.mr-2
                 | Đơn mua

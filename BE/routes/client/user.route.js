@@ -13,4 +13,8 @@ router.post("/register", controller.registerPost);
 
 router.get("/logout", controller.logout);
 
+router.get("/profile", controller.profile);
+
+router.put("/profile/update", controller.updateProfile);
+
 export default router;

@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../models/user.model.js';
+import Checkout from '../../models/checkout.model.js';
+
 
 // [GET] /user/login
 const login = (req, res) => {
@@ -96,12 +98,23 @@ const registerPost = async (req, res) => {
 
     const totalUsers = await User.count();
 
-    await User.create({
+    // Tạo user mới
+    const newUser = await User.create({
       id: totalUsers + 1,
       username,
       email,
       password_hash,
       role: 'customer',
+      created_at: new Date()
+    });
+
+    const totalCheckouts = await Checkout.count();
+
+    await Checkout.create({
+      id: totalCheckouts + 1,
+      user_id: newUser.id,
+      address: "Chưa cập nhật",
+      phone: "Chưa cập nhật",
       created_at: new Date()
     });
 
@@ -124,4 +137,59 @@ const logout = (req, res) => {
   res.redirect(`/`);
 };
 
-export default { login, loginPost, register, registerPost, logout };
+export const profile = (req, res) => {
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.redirect('/user/login');
+  }
+
+  Checkout.findAll({
+    where: { user_id: userId }
+  })
+  .then(checkouts => {
+    res.render('client/pages/user/profile', {
+      pageTitle: 'Hồ sơ cá nhân',
+      user: req.user,    // thông tin user đang login
+      checkouts
+    });
+  })
+  .catch(err => {
+    console.error("Error fetching user profile:", err);
+    res.status(500).send("Lỗi server: " + err.message);
+  });
+};
+
+// [PUT] /user/profile/update
+export const updateProfile = async (req, res) => {
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ message: "Bạn cần đăng nhập để cập nhật hồ sơ." });
+  }   
+  const { username, email, address, phone } = req.body;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Người dùng không tồn tại." });
+    }   
+    // Cập nhật thông tin người dùng
+    user.username = username || user.username;
+    user.email = email || user.email;
+    await user.save();
+    // Cập nhật thông tin checkout
+    const checkout = await Checkout.findOne({ where: { user_id: userId } });
+    if (checkout) {
+      checkout.address = address || checkout.address;
+      checkout.phone = phone || checkout.phone;
+      await checkout.save();
+    }
+
+
+    res.status(200).json({ message: "Cập nhật hồ sơ thành công." });
+  } catch (err) {
+    console.error("Error updating profile:", err);
+    res.status(500).json({ message: "Lỗi server: " + err.message });
+  }
+}
+
+export default { login, loginPost, register, registerPost, logout, profile, updateProfile   };

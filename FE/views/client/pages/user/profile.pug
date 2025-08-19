@@ -1,0 +1,162 @@
+extends ../../layouts/default.pug
+
+block main
+    h2 Hồ sơ cá nhân
+
+    table.checkout-table
+        thead
+            tr
+                th ID
+                th Username
+                th Email
+                th Địa chỉ
+                th Số điện thoại
+                th Hành động
+        tbody
+            each item in checkouts
+                tr(data-id=item.id)
+                    td= item.id
+                    td= user.username
+                    td= user.email
+                    td.address-cell= item.address
+                    td.phone-cell= item.phone
+                    td
+                        button.edit-btn(type="button") Chỉnh sửa
+                        button.save-btn(type="button" style="display:none") Lưu
+
+block styles
+    style.
+        .checkout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .checkout-table th, .checkout-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .checkout-table thead {
+            background: #4a90e2;
+            color: #fff;
+        }
+        .checkout-table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .checkout-table tbody tr:hover {
+            background: #eef6ff;
+        }
+        .checkout-table button {
+            padding: 6px 12px;
+            margin: 0 4px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .edit-btn {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .save-btn {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .edit-input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+block scripts
+    script.
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll(".edit-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+              const row = this.closest("tr");
+              const addressCell = row.querySelector(".address-cell");
+              const phoneCell = row.querySelector(".phone-cell");
+              const saveBtn = row.querySelector(".save-btn");
+
+              // đổi text thành input
+              const address = addressCell.textContent.trim();
+              const phone = phoneCell.textContent.trim();
+              addressCell.innerHTML = `<input type="text" value="${address}" class="edit-input">`;
+              phoneCell.innerHTML = `<input type="text" value="${phone}" class="edit-input">`;
+
+              this.style.display = "none";
+              saveBtn.style.display = "inline-block";
+            });
+          });
+
+          document.querySelectorAll(".save-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+              const row = this.closest("tr");
+              const id = row.dataset.id;
+              const addressCell = row.querySelector(".address-cell");
+              const phoneCell = row.querySelector(".phone-cell");
+              const editBtn = row.querySelector(".edit-btn");
+
+              const newAddress = addressCell.querySelector("input").value;
+              const newPhone = phoneCell.querySelector("input").value;
+
+              // hiển thị lại text
+              addressCell.textContent = newAddress;
+              phoneCell.textContent = newPhone;
+
+              this.style.display = "none";
+              editBtn.style.display = "inline-block";
+
+              // TODO: gửi dữ liệu về server bằng fetch/axios
+              console.log("Lưu checkout", id, newAddress, newPhone);
+            });
+          });
+        });
+
+        document.querySelectorAll(".save-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const row = this.closest("tr");
+                const addressCell = row.querySelector(".address-cell");
+                const phoneCell = row.querySelector(".phone-cell");
+                const editBtn = row.querySelector(".edit-btn");
+
+                const newAddress = addressCell.querySelector("input").value;
+                const newPhone = phoneCell.querySelector("input").value;
+
+                // hiển thị lại text
+                addressCell.textContent = newAddress;
+                phoneCell.textContent = newPhone;
+
+                this.style.display = "none";
+                editBtn.style.display = "inline-block";
+
+                // Gửi dữ liệu về server
+                fetch("/user/profile/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // gửi đủ trường cần update
+                    username: row.querySelector("td:nth-child(2)").textContent.trim(),
+                    email: row.querySelector("td:nth-child(3)").textContent.trim(),
+                    address: newAddress,
+                    phone: newPhone
+                })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                    alert(data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error("Fetch error:", err);
+                    alert("Không thể kết nối server!");
+                });
+            });
+            });
