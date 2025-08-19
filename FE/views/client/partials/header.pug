@@ -14,7 +14,30 @@ header.header
     .header-right
       a(href="#") Liên hệ với chúng tôi
       i.fa.fa-heart
-      a(href="/user/login").fa.fa-user
+      //- User dropdown
+      if user && user.username
+        .dropdown
+          button.btn.btn-light.border.rounded-pill.px-3.dropdown-toggle#userMenu(
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          )
+            i.fas.fa-user-circle.mr-2.text-primary
+            | #{user.username}
+          ul.dropdown-menu.dropdown-menu-end.shadow(aria-labelledby="userMenu")
+            li
+              a.dropdown-item(href="/user/orders")
+                i.fas.fa-shopping-cart.mr-2
+                | Đơn mua
+            li
+              hr.dropdown-divider
+            li
+              a.dropdown-item.text-danger(href="/user/logout")
+                i.fas.fa-sign-out-alt.mr-2
+                | Đăng xuất
+      else
+        a(href="/user/login")
+          i.fas.fa-user-circle
 
   .sub-header
     .category

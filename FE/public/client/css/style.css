@@ -467,11 +467,35 @@
 }
 
 .buy-now:hover {
-  background: #eee;
+  background: #444242;
   margin-right: 10px;
 }
+
+.add-to-cart:hover {
+  background: #ffffff;
+  margin-right: 10px;
+}
+
 
 .buy-now {
   background: #111;
   color: white;
+}
+
+
+.header-right .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.header-right .dropdown-menu {
+  min-width: 150px;
+}
+
+.header-right .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

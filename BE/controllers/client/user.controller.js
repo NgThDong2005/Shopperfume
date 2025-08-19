@@ -38,6 +38,12 @@ const loginPost = async (req, res) => {
     // Generate JWT token
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.cookie('token', token, { httpOnly: true });
+    const account = await User.findOne({
+      where: { id: user.id, email: user.email },
+      attributes: ["id", "username", "email", "role", "created_at"]
+    });
+    req.session.user = account;
+
     return res.redirect(`/`);
   } catch (err) {
     console.error('Login error:', err);

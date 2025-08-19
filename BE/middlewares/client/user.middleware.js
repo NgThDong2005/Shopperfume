@@ -1,5 +1,3 @@
-// BE/middlewares/admin/auth.middleware.js
-import systemConfig from "../../config/system.js";
 import User from "../../models/user.model.js";
 import jwt from "jsonwebtoken";
 
@@ -10,27 +8,25 @@ export const requireAuth = async (req, res, next) => {
     const { token } = req.cookies;
 
     if (!token) {
-      return res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
+      return res.redirect(`/user/login`);
     }
 
     let decoded;
     try {
       decoded = jwt.verify(token, JWT_SECRET);
     } catch (err) {
-      return res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
+      return res.redirect(`/user/login`);
     }
 
-    // Tìm user trong DB
     const account = await User.findOne({
       where: { id: decoded.id, email: decoded.email },
       attributes: ["id", "username", "email", "role", "created_at"]
     });
 
     if (!account) {
-      return res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
+      return res.redirect(`/user/ogin`);
     }
 
-    // Gắn user vào locals để view pug có thể dùng
     res.locals.user = account;
     req.user = account;   
 
@@ -40,12 +36,4 @@ export const requireAuth = async (req, res, next) => {
   }
 };
 
-
-export const attachUserToLocals = (req, res, next) => {
-  if (!res.locals.user) {
-    res.locals.user = req.session.user || null;
-  }
-  next();
-};
-
-export default { requireAuth, attachUserToLocals };
+export default { requireAuth };
