@@ -20,5 +20,40 @@ block main
       .product-description
         != product.description
 
-      a.add-to-cart(href=`/cart/add/${product.slug}?action=add`) Thêm vào danh sách yêu thích
+      button.add-to-cart(
+        type="button"
+        data-product-id=product.id
+      ) Thêm vào danh sách yêu thích
       a.buy-now(href=`/cart/add/${product.slug}?action=buy`) Mua ngay
+
+block scripts
+  script.
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.querySelector(".add-to-cart");
+
+      if (btn) {
+        btn.addEventListener("click", async () => {
+          const productId = btn.getAttribute("data-product-id");
+
+          try {
+            const res = await fetch("/wishlist/add", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ product_id: productId })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+              alert("Đã thêm vào danh sách yêu thích!");
+            } else {
+              alert(data.message);
+            }
+          } catch (err) {
+            console.error(err);
+            alert("Có lỗi xảy ra!");
+          }
+        });
+      }
+    });

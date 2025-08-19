@@ -1,13 +1,65 @@
 extends ../../layouts/default.pug
 
 block main
-    h4 Sản phẩm yêu thích hiện tại (#{wishlist.length})
+    h4#wishlist-count Sản phẩm yêu thích hiện tại (#{wishlist.length})
     if wishlist.length > 0
-        ul.wishlist-items
-            each item in wishlist
-                li.wishlist-item
-                    a(href=`/product/${item.product.slug}`)
-                        img(src=item.product.image, alt=item.product.name)
-                        span.item-name= item.product.name
-                    span.item-price=`${Number(item.product.price).toLocaleString('vi-VN')} VND`
-                    button.remove-from-wishlist(data-id=item._id) Remove from Wishlist
+        section.wishlist-section
+            .product-grid.grid-view
+                each item in wishlist
+                    article.product-card
+                        a.card-link(href=`/product/${item.product.slug}`)
+                            if item.product.images && item.product.images.length > 0
+                                img.product-image(
+                                    src=item.product.images[0].image_url, 
+                                    alt=item.product.name
+                                )
+                            else
+                                img.product-image(
+                                    src="/images/no-image.png", 
+                                    alt=item.product.name
+                                )
+                        // nút X fontawesome
+                        button.remove-from-wishlist(
+                            data-wishlist-id=item.id
+                            title="Xóa khỏi yêu thích"
+                        )
+                            i.fas.fa-times
+                        .card-info
+                            h2.product-name=`Nước hoa ${item.product.name}`
+                            p.product-price #{item.product.price.toLocaleString()} đ
+
+block scripts
+    script.
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".remove-from-wishlist").forEach(btn => {
+                btn.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    const wishlistId = btn.dataset.wishlistId;
+                    console.log("Gửi wishlistId:", wishlistId);
+
+                    try {
+                        const res = await fetch("/wishlist/remove", { // <- sửa URL
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ wishlistId })
+                        });
+
+                        const data = await res.json();
+                        console.log("Response:", data);
+
+                        if (res.ok) {
+                            btn.closest(".product-card").remove();
+                            const countElem = document.getElementById("wishlist-count");
+                            const count = document.querySelectorAll(".product-card").length;
+                            countElem.textContent = `Sản phẩm yêu thích hiện tại (${count})`;
+                        } else {
+                            alert(data.message || "Xóa thất bại");
+                        }
+                    } catch (err) {
+                        console.error("Fetch lỗi:", err);
+                        alert("Có lỗi xảy ra, thử lại sau.");
+                    }
+                });
+            });
+        });
+

@@ -528,3 +528,24 @@ a.buy-now {
 a.buy-now:hover {
   background: #333;
 }
+
+.product-card {
+    position: relative; /* để nút X có thể nằm góc trên bên phải */
+}
+
+.remove-from-wishlist {
+    position: absolute;
+    top: 8px;      /* khoảng cách từ trên */
+    right: 8px;    /* khoảng cách từ phải */
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50%;
+    padding: 4px 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remove-from-wishlist:hover {
+    background: rgba(255,0,0,0.8);
+    color: #fff;
+}
