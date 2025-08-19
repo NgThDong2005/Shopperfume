@@ -36,4 +36,26 @@ export const requireAuth = async (req, res, next) => {
   }
 };
 
-export default { requireAuth };
+export const attachUser = async (req, res, next) => {
+  const { token } = req.cookies;
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const account = await User.findOne({
+        where: { id: decoded.id, email: decoded.email },
+        attributes: ["id", "username", "email", "role", "created_at"]
+      });
+
+      if (account) {
+        res.locals.user = account; // pug nhận biến user
+        req.user = account;        // controller cũng có thể dùng
+      }
+    } catch (err) {
+      res.clearCookie("token"); // token hết hạn thì xóa
+    }
+  }
+  next();
+};
+
+export default { requireAuth, attachUser };
