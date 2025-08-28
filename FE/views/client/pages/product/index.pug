@@ -1,30 +1,52 @@
 extends ../../layouts/default.pug
 
 block main
-  .product-detail
-    .product-gallery
-      if product.images && product.images.length > 0
-        img.main-image(src=product.image alt=product.name)
-        .thumbnail-list
-          each img, i in product.images
-            img.thumbnail(src=img alt=`${product.name} ${i}`)
+  form#product-search-form(style="margin-bottom:2rem")
+    input(type="text" name="keyword" placeholder="Tìm sản phẩm...")
+    select(name="gender")
+      option(value="") Giới tính
+      option(value="male") Nam
+      option(value="female") Nữ
+      option(value="unisex") Unisex
+    select(name="capacity")
+      option(value="") Dung tích
+      option(value="50ml") 50ml
+      option(value="100ml") 100ml
+      option(value="150ml") 150ml
+    select(name="season")
+      option(value="") Mùa
+      option(value="summer") Hè
+      option(value="winter") Đông
+      option(value="spring") Xuân
+      option(value="autumn") Thu
+    button(type="submit") Tìm kiếm
+  #product-list
+    // Sản phẩm sẽ được render động bằng JS
 
-    .product-info
-      if product.brand
-        .brand
-          h1.brand-name= `${product.brand.name}`
+    .product-detail
+      .product-gallery
+        if product.images && product.images.length > 0
+          img.main-image(src=product.image alt=product.name)
+          .thumbnail-list
+            each img, i in product.images
+              img.thumbnail(src=img alt=`${product.name} ${i}`)
 
-      h1.product-name-detail= product.name
-      p.product-price-detail= `${Number(product.price).toLocaleString()} VND`
+      .product-info
+        if product.brand
+          .brand
+            h1.brand-name= `${product.brand.name}`
 
-      .product-description
-        != product.description
+        h1.product-name-detail= product.name
+        p.product-price-detail= `${Number(product.price).toLocaleString()} VND`
 
-      button.add-to-cart(
-        type="button"
-        data-product-id=product.id
-      ) Thêm vào danh sách yêu thích
-      a.buy-now(href=`/cart/add/${product.slug}?action=buy`) Mua ngay
+        .product-description
+          != product.description
+
+        button.add-to-cart(
+          type="button"
+          data-product-id=product.id
+        ) Thêm vào danh sách yêu thích
+        a.buy-now(href=`/cart/add/${product.slug}?action=buy`) Mua ngay
 
 block scripts
   script.
