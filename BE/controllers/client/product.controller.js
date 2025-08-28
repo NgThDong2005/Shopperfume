@@ -36,4 +36,30 @@ export const index = async (req, res) => {
   }
 };
 
+// [GET] /product/search?keyword=...&gender=...&capacity=...&season=...
+export const search = async (req, res) => {
+  try {
+    const { keyword, gender, capacity, season } = req.query;
+    const where = {};
+    if (keyword) {
+      where.name = { $like: `%${keyword}%` };
+    }
+    if (gender) {
+      where.gender = gender;
+    }
+    if (capacity) {
+      where.capacity = capacity;
+    }
+    if (season) {
+      where.season = season;
+    }
+    // Find products
+    const products = await Product.findAll({ where });
+    res.json({ products });
+  } catch (err) {
+    console.error("Product search error:", err);
+    res.status(500).json({ message: "Lỗi server: " + err.message });
+  }
+};
+
 export default { index };
