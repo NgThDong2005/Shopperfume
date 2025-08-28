@@ -59,3 +59,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Search & filter form
+  const form = document.getElementById("product-search-form");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const keyword = form.querySelector("input[name='keyword']").value;
+      const gender = form.querySelector("select[name='gender']").value;
+      const capacity = form.querySelector("select[name='capacity']").value;
+      const season = form.querySelector("select[name='season']").value;
+      const params = new URLSearchParams({ keyword, gender, capacity, season });
+      try {
+        const res = await fetch(`/product/search?${params.toString()}`);
+        const data = await res.json();
+        const list = document.getElementById("product-list");
+        if (list) {
+          list.innerHTML = data.products.map(product => `
+            <div class="product-card">
+              <img src="${product.image || ''}" alt="${product.name}" />
+              <h2>${product.name}</h2>
+              <p>${Number(product.price).toLocaleString()} VND</p>
+              <p>Giới tính: ${product.gender || ''}</p>
+              <p>Dung tích: ${product.capacity || ''}</p>
+              <p>Mùa: ${product.season || ''}</p>
+            </div>
+          `).join("");
+        }
+      } catch (err) {
+        alert("Lỗi tìm kiếm sản phẩm");
+      }
+    });
+  }
+});
